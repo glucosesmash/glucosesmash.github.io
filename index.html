@@ -46,10 +46,13 @@
         </section>
 
         <section class="math-practice">
-            <h2>Math Practice</h2>
-            <p>Practice your addition skills!</p>
+            <div id="math-start-container" class="math-start-container">
+                <h2>Ready to Practice Math?</h2>
+                <p>Test your addition skills!</p>
+                <button onclick="startMath()" class="math-start-button">Math</button>
+            </div>
 
-            <div class="math-container">
+            <div id="math-container" class="math-container" style="display: none;">
                 <div class="math-question">
                     <span id="num1" class="math-number">23</span>
                     <span class="math-operator">+</span>
@@ -58,13 +61,12 @@
                     <input type="number" id="answer-input" class="math-input" placeholder="?">
                 </div>
 
-                <div class="math-buttons">
-                    <button onclick="checkAnswer()" class="math-button check-button">Check Answer</button>
-                    <button onclick="newQuestion()" class="math-button new-button">New Question</button>
-                </div>
+                <button onclick="checkAnswer()" class="math-button check-button">Check Answer</button>
 
                 <div id="feedback" class="math-feedback"></div>
                 <div class="math-score">Score: <span id="score">0</span> / <span id="total">0</span></div>
+
+                <button onclick="closeMath()" class="math-close-button">Close</button>
             </div>
         </section>
 
@@ -162,6 +164,17 @@
         let score = 0;
         let total = 0;
 
+        function startMath() {
+            document.getElementById('math-start-container').style.display = 'none';
+            document.getElementById('math-container').style.display = 'block';
+            generateQuestion();
+        }
+
+        function closeMath() {
+            document.getElementById('math-container').style.display = 'none';
+            document.getElementById('math-start-container').style.display = 'block';
+        }
+
         function generateQuestion() {
             // Generate two random numbers between 10 and 50 (kid-friendly)
             const num1 = Math.floor(Math.random() * 41) + 10; // 10-50
@@ -186,37 +199,37 @@
                 return;
             }
 
-            total++;
-
             if (userAnswer === currentAnswer) {
                 score++;
-                feedback.textContent = '🎉 Correct! Great job!';
+                total++;
+                feedback.textContent = '🎉 Correct!';
                 feedback.className = 'math-feedback correct';
+
+                document.getElementById('score').textContent = score;
+                document.getElementById('total').textContent = total;
+
+                // Auto-advance to next question after 1 second
+                setTimeout(function() {
+                    generateQuestion();
+                }, 1000);
             } else {
-                feedback.textContent = `Not quite. The answer is ${currentAnswer}. Try the next one!`;
+                feedback.textContent = '❌ Try again!';
                 feedback.className = 'math-feedback incorrect';
+                document.getElementById('answer-input').value = '';
+                document.getElementById('answer-input').focus();
             }
-
-            document.getElementById('score').textContent = score;
-            document.getElementById('total').textContent = total;
         }
-
-        function newQuestion() {
-            generateQuestion();
-        }
-
-        // Generate first question when page loads
-        window.onload = function() {
-            generateQuestion();
-        };
 
         // Allow Enter key to check answer
         document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('answer-input').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    checkAnswer();
-                }
-            });
+            const input = document.getElementById('answer-input');
+            if (input) {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        checkAnswer();
+                    }
+                });
+            }
         });
     </script>
 </body>

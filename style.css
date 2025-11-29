@@ -333,17 +333,43 @@ a:hover {
     margin: 3rem 0;
 }
 
-.math-practice h2 {
+.math-start-container {
     text-align: center;
-    color: white;
-    margin-top: 0;
+    padding: 2rem;
 }
 
-.math-practice > p {
-    text-align: center;
+.math-start-container h2 {
+    color: white;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.math-start-container p {
     color: white;
     font-size: 1.1rem;
     margin-bottom: 2rem;
+}
+
+.math-start-button {
+    padding: 1.5rem 4rem;
+    font-size: 2rem;
+    font-weight: bold;
+    background: white;
+    color: #667eea;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.math-start-button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+}
+
+.math-start-button:active {
+    transform: translateY(-2px);
 }
 
 .math-container {
@@ -389,14 +415,8 @@ a:hover {
     box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
 }
 
-.math-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-}
-
 .math-button {
+    width: 100%;
     padding: 1rem 2rem;
     font-size: 1.1rem;
     font-weight: 600;
@@ -404,6 +424,7 @@ a:hover {
     border-radius: 8px;
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 1.5rem;
 }
 
 .check-button {
@@ -411,10 +432,23 @@ a:hover {
     color: white;
 }
 
-.new-button {
+.math-close-button {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
     background: #f8f9fa;
-    color: #667eea;
-    border: 2px solid #667eea;
+    color: #666;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 1rem;
+}
+
+.math-close-button:hover {
+    background: #e9ecef;
+    border-color: #bbb;
 }
 
 .math-button:hover {
@@ -567,15 +601,14 @@ a:hover {
         font-size: 2rem;
     }
 
-    .math-buttons {
-        flex-direction: column;
-        gap: 0.75rem;
-    }
-
     .math-button {
-        width: 100%;
         padding: 0.875rem 1.5rem;
         font-size: 1rem;
+    }
+
+    .math-start-button {
+        padding: 1.25rem 3rem;
+        font-size: 1.5rem;
     }
 
     .math-feedback {
